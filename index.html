@@ -834,7 +834,7 @@ function showRankingScreen(){
     localStorage.getItem("playerId");
 
   const url =
-        `https://script.google.com/macros/s/AKfycbx_08cke11frlnfvyODDuU_-sIiHPQZUHM-CASk5BUH_D2lPz4UFA5NNFVQ6MJ5EEUILg/exec?api=ranking&playerId=${currentPlayerId}`;
+  `https://script.google.com/macros/s/AKfycbx_08cke11frlnfvyODDuU_-sIiHPQZUHM-CASk5BUH_D2lPz4UFA5NNFVQ6MJ5EEUILg/exec?api=ranking&playerId=${currentPlayerId}`;
     
       console.log(currentPlayerId);
       console.log(url);
@@ -862,13 +862,13 @@ function showRankingScreen(){
 function displayRanking(data){
 
   document.getElementById("easy-ranking").innerHTML =
-    createRankingHtml(data.easy);
+    createRankingHtml(data.grade1);
 
   document.getElementById("normal-ranking").innerHTML =
-    createRankingHtml(data.normal);
+    createRankingHtml(data.grade2);
 
   document.getElementById("hard-ranking").innerHTML =
-    createRankingHtml(data.hard);
+    createRankingHtml(data.grade3);
 
 }
 
@@ -899,7 +899,6 @@ function createRankingHtml(list){
         <span>${medal}</span>
         <span>${r.character || ""}</span>
         <span>${r.userId}</span>
-        <span>${r.field}</span>
         <span class="rank-score">${r.score}pt</span>
     </div>
     `;
@@ -969,8 +968,6 @@ switch(selectedGrade){
         break;
 }
 
-let difficultyName = "";
-
 let gradeNumber = 1;
 
 switch(selectedGrade){
@@ -996,7 +993,7 @@ const gradeData =
 if(!gradeData){
 
     throw new Error(
-        "分野が見つかりません"
+        "学年が見つかりません"
     );
 }
 
@@ -1050,7 +1047,8 @@ questions =
 
         return;
     }
-
+    monsterMaxHp = 300;
+    playerMaxHp = 120;
     currentQuestionIndex = 0;
 
     playerHp = playerMaxHp;

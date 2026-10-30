@@ -215,7 +215,7 @@ body {
 
         .ranking-row{
             display:grid;
-            grid-template-columns:30px 24px minmax(0,1fr) 50px 65px;
+            grid-template-columns:30px 24px minmax(0,1fr) 80px;
             align-items:center;
             gap:1px;
             padding:8px 0;
@@ -540,15 +540,15 @@ body {
 
                 <div class="ranking-card">
                   <div class="ranking-title difficulty-easy">
-                    かんたん
-                  </div>
+                 　 中1
+              　  </div>
 
                   <div id="easy-ranking"></div>
                 </div>
 
                 <div class="ranking-card">
                   <div class="ranking-title difficulty-normal">
-                    ふつう
+                    中2
                   </div>
 
                   <div id="normal-ranking"></div>
@@ -556,7 +556,7 @@ body {
 
                 <div class="ranking-card">
                   <div class="ranking-title difficulty-hard">
-                    むずかしい
+                    中3
                   </div>
 
                   <div id="hard-ranking"></div>
@@ -585,31 +585,34 @@ body {
                 <div class="subtitle">挑戦するエリアを選択してください</div>
                 <div class="section-label"
                     style="border:none;color:#475569;">
-                    難易度
+                    学年
                 </div>
 
-                <div class="select-group" id="diff-group">
-
-                    <div class="select-chip"
-                    onclick="selectDifficulty('easy', this)">
-                    かんたん
-                    </div>
-
-                    <div class="select-chip selected"
-                    onclick="selectDifficulty('normal', this)">
-                    ふつう
-                    </div>
-
-                    <div class="select-chip"
-                    onclick="selectDifficulty('hard', this)">
-                    むずかしい
-                    </div>
+                <div class="select-group" id="grade-group">
+                
+                  <div class="select-chip selected"
+                    onclick="selectGrade('中1', this)">
+                    中1
+                  </div>
+                
+                  <div class="select-chip"
+                    onclick="selectGrade('中2', this)">
+                    中2
+                  </div>
+                
+                  <div class="select-chip"
+                    onclick="selectGrade('中3', this)">
+                    中3
+                  </div>
+                
+                </div>
 
                 </div>
-                <button class="btn" onclick="openSummary('生物')">🌲 生物ステージ</button>
-                <button class="btn" onclick="openSummary('化学')">🧪 化学ステージ</button>
-                <button class="btn" onclick="openSummary('物理')">⚡ 物理ステージ</button>
-                <button class="btn" onclick="openSummary('地学')">🌋 地学ステージ</button>
+                <button
+                class="btn center-btn"
+                onclick="openSummary()">
+                スタート
+                </button>
                 <button class="btn center-btn"
                     style="margin-top: 15px;
                     background: #f1f5f9;
@@ -741,8 +744,7 @@ const enemyDatabase = {
 
 let currentIcon = "🐶";
 let currentAura = "aura-yellow";
-let selectedDiff = "normal";
-let currentField = "";
+let selectedGrade = "中1";
 let questions = []; 
 let currentQuestionIndex = 0;
 let playerHp = 100;
@@ -765,17 +767,17 @@ function displayAllRankings(data) {
 
 renderTop3(
   "easy-ranking",
-  data.easy.top3
+  data.grade1.top3
 );
 
 renderTop3(
   "normal-ranking",
-  data.normal.top3
+  data.grade2.top3
 );
 
 renderTop3(
   "hard-ranking",
-  data.hard.top3
+  data.grade3.top3
 );
 
     renderMyRankings(data);
@@ -802,10 +804,19 @@ function updateAvatarDisplay() {
     document.getElementById('title-char-layer').innerText = currentIcon;
 }
 
-function selectDifficulty(diff, element) {
-    document.querySelectorAll('#diff-group .select-chip').forEach(c => c.classList.remove('selected'));
-    element.classList.add('selected');
-    selectedDiff = diff;
+function selectGrade(grade, element) {
+
+  document
+    .querySelectorAll(
+      '#grade-group .select-chip'
+    )
+    .forEach(
+      c => c.classList.remove('selected')
+    );
+
+  element.classList.add('selected');
+
+  selectedGrade = grade;
 }
 
 function changeScreen(screenId) {
@@ -897,10 +908,16 @@ function createRankingHtml(list){
   return html;
 }
 
-function openSummary(field) {
-    currentField = field;
-    document.getElementById('summary-stage-name').innerText = `${field} ステージ`;
-    changeScreen('screen-summary');
+function openSummary() {
+
+  document
+    .getElementById(
+      'summary-stage-name'
+    )
+    .innerText =
+      `${selectedGrade}`;
+
+  changeScreen('screen-summary');
 }
 
 function triggerShake() {
@@ -924,7 +941,7 @@ async function loadFieldViaAPI() {
     try {
 
         const response =
-            await fetch("https://api.npoint.io/00b1b8a0970149d5a89b");
+            await fetch("https://api.npoint.io/7a25efbcad370591c155");
 
         if (!response.ok) {
             throw new Error(
@@ -935,50 +952,48 @@ async function loadFieldViaAPI() {
         const apiData =
     await response.json();
 
-let subjectName = "";
+let gradeName = "";
 
-switch(currentField){
+switch(selectedGrade){
 
-    case "物理":
-        subjectName = "物理基礎";
+    case "中1":
+        gradeName = "中1";
         break;
 
-    case "化学":
-        subjectName = "化学基礎";
+    case "中2":
+        gradeName = "中2";
         break;
 
-    case "生物":
-        subjectName = "生物基礎";
-        break;
-
-    case "地学":
-        subjectName = "地学基礎";
+    case "中3":
+        gradeName = "中3";
         break;
 }
 
 let difficultyName = "";
 
-switch(selectedDiff){
+let gradeNumber = 1;
 
-    case "easy":
-        difficultyName = "easy";
-        break;
+switch(selectedGrade){
 
-    case "normal":
-        difficultyName = "normal";
-        break;
+  case "中1":
+    gradeNumber = 1;
+    break;
 
-    case "hard":
-        difficultyName = "hard";
-        break;
+  case "中2":
+    gradeNumber = 2;
+    break;
+
+  case "中3":
+    gradeNumber = 3;
+    break;
 }
 
-const subjectData =
-    apiData.subjects.find(
-        s => s.subject === subjectName
-    );
+const gradeData =
+  apiData.grades.find(
+    g => g.grade === gradeNumber
+  );
 
-if(!subjectData){
+if(!gradeData){
 
     throw new Error(
         "分野が見つかりません"
@@ -987,24 +1002,24 @@ if(!subjectData){
 
 console.log(
   "全問題数",
-  subjectData.questions.length
+  gradeData.questions.length
 );
         
 questions =
-    subjectData.questions
-        .map(q => ({
+  gradeData.questions
+    .map(q => ({
 
-            q: q.question,
+      q: q.question,
 
-            a: q.choices,
+      a: q.choices,
 
-            correct:
-                q.correctChoiceIndex,
+      correct:
+        q.choices.indexOf(q.answer),
 
-            note:
-                q.explanation
+      note:
+        ""
 
-        }));
+    }));
 
 
 
@@ -1034,27 +1049,6 @@ questions =
         );
 
         return;
-    }
-
-    if (selectedDiff === "easy") {
-
-        monsterMaxHp = 200;
-        playerMaxHp = 100;
-
-    }
-
-    else if (selectedDiff === "normal") {
-
-        monsterMaxHp = 300;
-        playerMaxHp = 120;
-
-    }
-
-    else {
-
-        monsterMaxHp = 400;
-        playerMaxHp = 140;
-
     }
 
     currentQuestionIndex = 0;
@@ -1148,7 +1142,10 @@ if (currentQuestionIndex >= questions.length) {
 }
     
     let qData = questions[currentQuestionIndex];
-    let enemy = enemyDatabase[currentField];
+    let enemy = {
+      name: "理科マスター",
+      icon: "🧑‍🔬"
+    };
     
     document.getElementById('m-name').innerText = enemy.name;
     document.getElementById('m-icon').innerText = enemy.icon;
@@ -1373,9 +1370,9 @@ function renderMyRankings(data) {
     if (!target) return;
 
     const difficulties = [
-        ["かんたん","easy"],
-        ["ふつう","normal"],
-        ["むずかしい","hard"]
+      ["中1","grade1"],
+      ["中2","grade2"],
+      ["中3","grade3"]
     ];
 
     let html = "";
@@ -1393,9 +1390,9 @@ function renderMyRankings(data) {
             <div class="my-ranking-item">
 
                 <div class="my-ranking-difficulty ${
-                  item[1] === "easy"
+                  item[1] === "grade1"
                     ? "difficulty-easy"
-                    : item[1] === "normal"
+                    : item[1] === "grade2"
                     ? "difficulty-normal"
                     : "difficulty-hard"
                 }">
@@ -1430,9 +1427,9 @@ function renderMyRankings(data) {
             <div class="my-ranking-item">
 
                 <div class="my-ranking-difficulty ${
-                  item[1] === "easy"
+                  item[1] === "grade1"
                     ? "difficulty-easy"
-                    : item[1] === "normal"
+                    : item[1] === "grade2"
                     ? "difficulty-normal"
                     : "difficulty-hard"
                 }">
@@ -1520,40 +1517,41 @@ function endGame(isWin) {
     const bonus = (wrongCount === 0) ? 500 : 0;
     
     score = Math.max(0, score);
-
-console.log({
-  userId: getUserName(),
-　playerId: playerId,
-  difficulty: selectedDiff,
-  field: currentField,
-  playTime: playTime,
-  correct: correctCount,
-  wrong: wrongCount,
-  score: score + bonus,
-  character: currentIcon,
-  aura: currentAura
-});
     
 fetch(
   "https://script.google.com/macros/s/AKfycbx_08cke11frlnfvyODDuU_-sIiHPQZUHM-CASk5BUH_D2lPz4UFA5NNFVQ6MJ5EEUILg/exec",
   {
     method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify({
-      userId: getUserName(),
-      playerId: playerId,
-      difficulty: selectedDiff,
-      field: currentField,
-      playTime: playTime,
-      correct: correctCount,
-      wrong: wrongCount,
-      score: score + bonus,
-      character: currentIcon,
-      aura: currentAura,
-      result: isWin ? "WIN" : "LOSE"
-    })
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+    
+        body: JSON.stringify({
+    
+          userId: getUserName(),
+    
+          playerId: playerId,
+    
+          grade: selectedGrade,
+    
+          playTime: playTime,
+    
+          correct: correctCount,
+    
+          wrong: wrongCount,
+    
+          score: score + bonus,
+    
+          character: currentIcon,
+    
+          aura: currentAura,
+    
+          result: isWin ? "WIN" : "LOSE"
+    
+        })
+    
+      }
+    )
   }
 )
 .then(r => r.text())

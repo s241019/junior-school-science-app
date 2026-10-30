@@ -765,22 +765,24 @@ let isProcessing = false;
 
 function displayAllRankings(data) {
 
-renderTop3(
-  "easy-ranking",
-  data.grade1.top3
-);
-
-renderTop3(
-  "normal-ranking",
-  data.grade2.top3
-);
-
-renderTop3(
-  "hard-ranking",
-  data.grade3.top3
-);
-
-    renderMyRankings(data);
+  console.log(data);
+    
+    renderTop3(
+      "easy-ranking",
+      data.grade1.top3
+    );
+    
+    renderTop3(
+      "normal-ranking",
+      data.grade2.top3
+    );
+    
+    renderTop3(
+      "hard-ranking",
+      data.grade3.top3
+    );
+    
+        renderMyRankings(data);
 }
 
 function setChar(icon) {

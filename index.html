@@ -781,43 +781,6 @@ renderTop3(
     renderMyRankings(data);
 }
 
-function renderTop3(elementId, list) {
-
-    const target =
-        document.getElementById(elementId);
-
-    if (!target) return;
-
-    if (!list || list.length === 0) {
-
-        target.innerHTML =
-            '<div class="ranking-empty">記録なし</div>';
-
-        return;
-    }
-
-    const medals =
-        ["1位","2位","3位"];
-
-    let html = "";
-
-    list.forEach((record,index)=>{
-
-        html += `
-        <div class="ranking-row">
-            <div>${medals[index]}</div>
-            <div>${record.character || ""}</div>
-            <div>${record.userId}#${record.playerId.substring(0,4)}</div>
-            <div>${record.userId}</div>
-            <div>${record.field}</div>
-            <div class="ranking-score">${record.score}pt</div>
-        </div>
-        `;
-    });
-
-    target.innerHTML = html;
-}
-
 function setChar(icon) {
     currentIcon = icon; updateAvatarDisplay();
     document.querySelectorAll('#char-grp .icon-circle').forEach(c => {
@@ -1387,10 +1350,6 @@ function renderTop3(elementId, list) {
         
             <div>
                 ${record.userId}
-            </div>
-        
-            <div>
-                ${record.field}
             </div>
         
             <div class="ranking-score">

@@ -437,6 +437,18 @@ body {
         .ranking-button-row .btn{
           flex:1;
         }
+
+        .grade1-btn{
+          border-color:#22c55e;
+        }
+        
+        .grade2-btn{
+          border-color:#3b82f6;
+        }
+        
+        .grade3-btn{
+          border-color:#ef4444;
+        }
         
     }
 
@@ -588,22 +600,20 @@ body {
                     学年
                 </div>
 
-                <div class="select-group" id="grade-group">
+                <button class="btn"
+                onclick="selectGradeAndStart('中1')">
+                📗 中1クイズ
+                </button>
                 
-                  <div class="select-chip selected"
-                    onclick="selectGrade('中1', this)">
-                    中1
-                  </div>
+                <button class="btn"
+                onclick="selectGradeAndStart('中2')">
+                📘 中2クイズ
+                </button>
                 
-                  <div class="select-chip"
-                    onclick="selectGrade('中2', this)">
-                    中2
-                  </div>
-                
-                  <div class="select-chip"
-                    onclick="selectGrade('中3', this)">
-                    中3
-                  </div>
+                <button class="btn"
+                onclick="selectGradeAndStart('中3')">
+                📕 中3クイズ
+                </button>
                 
                 </div>
 
@@ -779,6 +789,14 @@ function displayAllRankings(data) {
     );
     
         renderMyRankings(data);
+}
+
+function selectGradeAndStart(grade){
+
+  selectedGrade = grade;
+
+  openSummary();
+
 }
 
 function setChar(icon) {

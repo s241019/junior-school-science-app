@@ -1492,6 +1492,7 @@ function useHintItem() {
 
     updateHintDisplay();
 }
+    
 function endGame(isWin) {
 
     let bonusText = "";
@@ -1518,42 +1519,41 @@ function endGame(isWin) {
     
     score = Math.max(0, score);
     
-fetch(
-  "https://script.google.com/macros/s/AKfycbx_08cke11frlnfvyODDuU_-sIiHPQZUHM-CASk5BUH_D2lPz4UFA5NNFVQ6MJ5EEUILg/exec",
-  {
-    method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-    
-        body: JSON.stringify({
-    
-          userId: getUserName(),
-    
-          playerId: playerId,
-    
-          grade: selectedGrade,
-    
-          playTime: playTime,
-    
-          correct: correctCount,
-    
-          wrong: wrongCount,
-    
-          score: score + bonus,
-    
-          character: currentIcon,
-    
-          aura: currentAura,
-    
-          result: isWin ? "WIN" : "LOSE"
-    
-        })
-    
-      }
-    )
-  }
-)
+    fetch(
+      "https://script.google.com/macros/s/AKfycbx_08cke11frlnfvyODDuU_-sIiHPQZUHM-CASk5BUH_D2lPz4UFA5NNFVQ6MJ5EEUILg/exec",
+      {
+        method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8"
+            },
+        
+            body: JSON.stringify({
+        
+              userId: getUserName(),
+        
+              playerId: playerId,
+        
+              grade: selectedGrade,
+        
+              playTime: playTime,
+        
+              correct: correctCount,
+        
+              wrong: wrongCount,
+        
+              score: score + bonus,
+        
+              character: currentIcon,
+        
+              aura: currentAura,
+        
+              result: isWin ? "WIN" : "LOSE"
+        
+            })
+        
+          }
+        )
+        
 .then(r => r.text())
 .then(data => {
   console.log("保存結果", data);

@@ -836,7 +836,7 @@ function showRankingScreen(){
     localStorage.getItem("playerId");
 
   const url =
-  `https://script.google.com/macros/s/AKfycbx_08cke11frlnfvyODDuU_-sIiHPQZUHM-CASk5BUH_D2lPz4UFA5NNFVQ6MJ5EEUILg/exec?api=ranking&playerId=${currentPlayerId}`;
+  `https://script.google.com/macros/s/AKfycbwQdysNCBwFU5WZoshJPU1ZuyuH-E0T_NLny2uxMnmed9Ck0M6LAjR7ZNac1c16x4lW/exec?api=ranking&playerId=${currentPlayerId}`;
     
       console.log(currentPlayerId);
       console.log(url);
@@ -1520,7 +1520,7 @@ function endGame(isWin) {
     score = Math.max(0, score);
     
     fetch(
-      "https://script.google.com/macros/s/AKfycbx_08cke11frlnfvyODDuU_-sIiHPQZUHM-CASk5BUH_D2lPz4UFA5NNFVQ6MJ5EEUILg/exec",
+      "https://script.google.com/macros/s/AKfycbwQdysNCBwFU5WZoshJPU1ZuyuH-E0T_NLny2uxMnmed9Ck0M6LAjR7ZNac1c16x4lW/exec",
       {
         method: "POST",
             headers: {

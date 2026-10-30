@@ -765,12 +765,12 @@ let isProcessing = false;
 
 function displayAllRankings(data) {
 
-  console.log(data);
-    
-    renderTop3(
-      "easy-ranking",
-      data.grade1.top3
-    );
+  console.log("ランキングデータ", data);
+
+　  renderTop3(
+  　  "easy-ranking",
+ 　   data.grade1.top3
+  　);
     
     renderTop3(
       "normal-ranking",

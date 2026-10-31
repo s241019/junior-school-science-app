@@ -1131,7 +1131,7 @@ function updateComboDisplay() {
     const hintEl = document.getElementById('combo-hint');
     if (comboCount === 0) {
         slot0.classList.remove('filled'); slot1.classList.remove('filled');
-        hintEl.innerHTML = "連続正解で追撃！"; hintEl.style.color = "#3b82f6";
+        hintEl.innerHTML = "連続正解で追撃"; hintEl.style.color = "#3b82f6";
     } else if (comboCount === 1) {
         slot0.classList.add('filled'); slot1.classList.remove('filled');
         hintEl.innerHTML = "あと1問正解でコンボ！"; hintEl.style.color = "#eab308";

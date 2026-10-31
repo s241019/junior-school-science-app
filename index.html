@@ -132,10 +132,11 @@ body {
         
         /* コンボ */
         .combo-container { background: #f1f5f9; padding: 10px; border-radius: 14px; border: 2px solid #e2e8f0; margin-bottom: 15px; }
-        .combo-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; }
+        .combo-header { display: flex; justify-content: space-between; font-size: 16px; font-weight: 800; color: #475569; margin-bottom: 6px; }
         .combo-slots { display: flex; justify-content: center; gap: 12px; }
         .combo-slot { width: 45px; height: 45px; background: #ffffff; border: 2px solid #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; font-weight: 900; color: #cbd5e1; transition: all 0.2s ease; }
         .combo-slot.filled { border-color: #eab308; background: #fef08a; color: #ca8a04; transform: scale(1.05); }
+        #combo-hint{ font-size:16px; font-weight:bold;}
         
         .message-box { min-height: 90px; background: #f8fafc; border-left: 6px solid #3b82f6; padding: 16px; margin-bottom: 12px; font-size: 18px; font-weight: bold; color: #1e293b; line-height: 1.8; box-sizing: border-box; border-radius: 0 12px 12px 0;
         overflow-wrap:anywhere;
@@ -376,7 +377,7 @@ body {
       }
     
       .my-ranking-next{
-        font-size:11px;
+        font-size:14px;
       }
     
       .my-ranking-difficulty{
@@ -464,7 +465,7 @@ body {
         <div style="display: flex; justify-content: center; margin: 25px 0;">
             <div id="title-avatar-node" class="avatar-frame"><div id="title-aura-layer" class="aura-effect aura-yellow"></div><div id="title-char-layer" class="avatar-character">🐶</div></div>
         </div>
-        <button class="btn center-btn" onclick="changeScreen('screen-avatar')">冒険をはじめる</button>
+        <button class="btn center-btn" onclick="changeScreen('screen-avatar')">スタート</button>
     </div>
 
     <div id="screen-avatar" class="screen">
@@ -1171,7 +1172,7 @@ if (currentQuestionIndex >= questions.length) {
     document.getElementById('m-hp-text').innerText = monsterHp;
     document.getElementById('m-hp-fill').style.width = `${Math.max(0, (monsterHp / monsterMaxHp) * 100)}%`;
     
-    document.getElementById('msg').innerHTML = `<span style="color: #64748b; font-size: 11px; display:block; margin-bottom:3px;">第 ${currentQuestionIndex + 1} 問</span>${qData.q}`;
+    document.getElementById('msg').innerHTML = `<span style="color: #64748b; font-size: 16px; display:block; margin-bottom:3px;">第 ${currentQuestionIndex + 1} 問</span>${qData.q}`;
     
     let choices = qData.a.map((txt, idx) => ({ text: txt, isCorrect: idx === qData.correct }));
     shuffle(choices);

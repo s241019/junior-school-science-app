@@ -1035,7 +1035,7 @@ questions =
         q.choices.indexOf(q.answer),
 
       note:
-        ""
+        q.explanation || "解説準備中"
 
     }));
 
@@ -1669,17 +1669,12 @@ actionLog.forEach((log) => {
                     ${log.q}
                 </div>
             </div>
-
-            ${
-                !log.isCorrect
-                ? `
-                <div class="explanation-box">
-                    <span>💡【解説】</span>
-                    ${log.note}
-                </div>
-                `
-                : ""
-            }
+        
+            <div class="explanation-box">
+                <span>💡【解説】</span>
+                ${log.note}
+            </div>
+        
         </div>
         `;
     });

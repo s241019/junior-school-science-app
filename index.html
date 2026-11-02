@@ -602,6 +602,37 @@ body {
                     学年
                 </div>
 
+                </div>  ← grade-group終了
+
+                <div class="section-label"
+                     style="border:none;color:#475569;">
+                  難易度
+                </div>
+                
+                <div class="select-group" id="difficulty-group">
+                
+                  <div class="select-chip selected"
+                       onclick="selectDifficulty('easy', this)">
+                    ★
+                  </div>
+                
+                  <div class="select-chip"
+                       onclick="selectDifficulty('normal', this)">
+                    ★★
+                  </div>
+                
+                  <div class="select-chip"
+                       onclick="selectDifficulty('hard', this)">
+                    ★★★
+                  </div>
+                
+                </div>
+                
+                <button class="btn center-btn"
+                onclick="openSummary()">
+                スタート
+                </button>
+
                 <button class="btn"
                 onclick="selectGradeAndStart('中1')">
                 📗 中1クイズ
@@ -746,16 +777,10 @@ body {
 // 【かんたん専用】基礎問題データベース（全問解説付）
 // ==========================================
 
-const enemyDatabase = {
-    "生物": { name: "もさもさ大樹", icon: "🌳" },
-    "化学": { name: "ぷるぷるスライム", icon: "💧" },
-    "物理": { name: "がしゃがしゃロボ", icon: "🤖" },
-    "地学": { name: "ゴロゴロいわおとこ", icon: "🗿" }
-};
-
 let currentIcon = "🐶";
 let currentAura = "aura-yellow";
 let selectedGrade = "中1";
+let selectedDifficulty = "easy";
 let questions = []; 
 let currentQuestionIndex = 0;
 let playerHp = 100;
@@ -838,6 +863,26 @@ function selectGrade(grade, element) {
   element.classList.add('selected');
 
   selectedGrade = grade;
+
+}
+
+function selectDifficulty(
+  difficulty,
+  element
+){
+
+  document
+    .querySelectorAll(
+      '#difficulty-group .select-chip'
+    )
+    .forEach(
+      c => c.classList.remove('selected')
+    );
+
+  element.classList.add('selected');
+
+  selectedDifficulty = difficulty;
+
 }
 
 function changeScreen(screenId) {
@@ -961,7 +1006,7 @@ async function loadFieldViaAPI() {
     try {
 
         const response =
-            await fetch("https://api.npoint.io/44dbd03771e92151a349");
+            await fetch("https://api.npoint.io/7a25efbcad370591c155");
 
         if (!response.ok) {
             throw new Error(
@@ -1025,6 +1070,9 @@ console.log(
         
 questions =
   gradeData.questions
+    .filter(q =>
+      q.difficulty === selectedDifficulty
+    )
     .map(q => ({
 
       q: q.question,

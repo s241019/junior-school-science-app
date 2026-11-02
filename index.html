@@ -1177,7 +1177,7 @@ function updateComboDisplay() {
 }
 
 function loadQuestion() {
-    console.log(qData);
+    
     
     if (monsterHp <= 0) {
     console.log("敵HP終了", monsterHp);
@@ -1201,6 +1201,7 @@ if (currentQuestionIndex >= questions.length) {
 }
     
     let qData = questions[currentQuestionIndex];
+    console.log(qData);
     let enemy = {
       name: "理科マスター",
       icon: "🧑‍🔬"

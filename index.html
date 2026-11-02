@@ -1273,10 +1273,25 @@ function handleAnswer(isCorrect, btn) {
 btn.style.background = "#ef4444";
 btn.style.color = "white";
     document.getElementById('msg').innerHTML =
-        `<span style="color:#f43f5e;">❌ まちがい！</span><br>
-         正解：<b>${correctAnswer}</b>`;
-
-    playerHp = Math.max(0, playerHp - 20);
+    `
+    <span style="color:#f43f5e;">
+    ❌ まちがい！
+    </span><br>
+    
+    正解：<b>${correctAnswer}</b>
+    
+    <div style="
+    margin-top:10px;
+    padding:10px;
+    background:#fff7ed;
+    border-left:5px solid #f59e0b;
+    border-radius:8px;
+    line-height:1.6;
+    ">
+    💡 ${currentQ.note}
+    </div>
+    `;
+    ``
 
     updatePlayerStatus();
 
@@ -1285,7 +1300,7 @@ btn.style.color = "white";
         currentQuestionIndex++;
         loadQuestion();
 
-    }, 2500);
+    }, 3200);
 }
 }
 function toggleExplanation(element) {
@@ -1671,7 +1686,7 @@ actionLog.forEach((log) => {
             </div>
         
             <div class="explanation-box">
-                <span>💡【解説】</span>
+                <span>【解説】</span>
                 ${log.note}
             </div>
         

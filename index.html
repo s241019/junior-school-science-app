@@ -1291,7 +1291,8 @@ btn.style.color = "white";
     【解説】<br> ${currentQ.note}
     </div>
     `;
-    ``
+
+    playerHp = Math.max(0, playerHp - 20);
 
     updatePlayerStatus();
 
@@ -1302,6 +1303,7 @@ btn.style.color = "white";
 
     }, 4000);
 }
+    
 }
 function toggleExplanation(element) {
     const expBox = element.querySelector('.explanation-box');

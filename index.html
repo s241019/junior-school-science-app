@@ -1071,7 +1071,7 @@ questions =
       a: q.choices,
 
       correct:
-        q.choices.indexOf(q.answer),
+        q.choices.indexOf(q.answer -1),
 
       note:
         q.explanation || "解説準備中"
@@ -1307,6 +1307,7 @@ function handleAnswer(isCorrect, btn) {
         else {
 
             btn.style.background = "#f8fafc";
+            
         }
 
     });

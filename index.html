@@ -1071,7 +1071,7 @@ questions =
       a: q.choices,
 
       correct:
-        q.answer - 1,
+        q.answer,
 
       note:
         q.explanation || "解説準備中"
@@ -1183,25 +1183,26 @@ function loadQuestion() {
     console.log("敵HP終了", monsterHp);
     endGame(true);
     return;
-}
+    }
 
-if (playerHp <= 0) {
-    console.log("自分HP終了", playerHp);
-    endGame(false);
-    return;
-}
+    if (playerHp <= 0) {
+        console.log("自分HP終了", playerHp);
+        endGame(false);
+        return;
+    }
 
-if (currentQuestionIndex >= questions.length) {
-
-    console.log("問題を一周したので先頭へ戻る");
-
-    currentQuestionIndex = 0;
-    questions = shuffle(questions);
+    if (currentQuestionIndex >= questions.length) {
     
-}
+        console.log("問題を一周したので先頭へ戻る");
+    
+        currentQuestionIndex = 0;
+        questions = shuffle(questions);
+        
+    }
     
     let qData = questions[currentQuestionIndex];
     console.log(qData);
+    
     let enemy = {
       name: "理科マスター",
       icon: "🧑‍🔬"
@@ -1219,14 +1220,15 @@ if (currentQuestionIndex >= questions.length) {
 
     let optionsHtml = "";
     choices.forEach((choice) => {
-optionsHtml += `
-<button
-class="btn quiz-opt-btn"
-data-correct="${choice.isCorrect}"
-onclick="handleAnswer(${choice.isCorrect}, this)">
-${choice.text}
-</button>
-`;    });
+    optionsHtml += `
+    <button
+    class="btn quiz-opt-btn"
+    data-correct="${choice.isCorrect}"
+    onclick="handleAnswer(${choice.isCorrect}, this)">
+    ${choice.text}
+    </button>
+    `;    
+    });
     document.getElementById('quiz-options').innerHTML = optionsHtml;
     hintsUsedThisQuestion = 0;
     isProcessing = false; // 次の問題が読み込まれたら解答可能にする

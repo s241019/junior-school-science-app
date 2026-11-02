@@ -595,37 +595,34 @@ body {
 
 
                 <div id="screen-select" class="screen">
-                <div class="title-logo" style="font-size:24px;">GAME SETTING</div>
-                <div class="subtitle">挑戦するエリアを選択してください</div>
-                <div class="section-label"
-                    style="border:none;color:#475569;">
-                    学年
-                </div>
+                    <div class="title-logo" style="font-size:24px;">GAME SETTING</div>
+                    <div class="subtitle">挑戦するエリアを選択してください</div>
+                    <div class="section-label"
+                        style="border:none;color:#475569;">
+                        学年
+                    </div>
+                    <div class="section-label"
+                         style="border:none;color:#475569;">
+                      難易度
+                    </div>
+                    
+                    <div class="select-group" id="difficulty-group">
+                    
+                      <div class="select-chip selected"
+                           onclick="selectDifficulty('easy', this)">
+                        かんたん
+                      </div>
+                    
+                      <div class="select-chip"
+                           onclick="selectDifficulty('normal', this)">
+                        ふつう
+                      </div>
+                    
+                      <div class="select-chip"
+                           onclick="selectDifficulty('hard', this)">
+                        むずかしい
+                      </div>
 
-                </div>  ← grade-group終了
-
-                <div class="section-label"
-                     style="border:none;color:#475569;">
-                  難易度
-                </div>
-                
-                <div class="select-group" id="difficulty-group">
-                
-                  <div class="select-chip selected"
-                       onclick="selectDifficulty('easy', this)">
-                    ★
-                  </div>
-                
-                  <div class="select-chip"
-                       onclick="selectDifficulty('normal', this)">
-                    ★★
-                  </div>
-                
-                  <div class="select-chip"
-                       onclick="selectDifficulty('hard', this)">
-                    ★★★
-                  </div>
-                
                 </div>
                 
                 <button class="btn center-btn"
